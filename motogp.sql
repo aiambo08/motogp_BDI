@@ -1,0 +1,90 @@
+CREATE SCHEMA IF NOT EXISTS motogp
+DEFAULT CHARACTER SET utf8
+COLLATE utf8_spanish2_ci;
+
+use motogp;
+
+-- 1. PILOTO
+CREATE TABLE riders (
+	id_rider	INTEGER 		AUTO_INCREMENT,
+    forename	VARCHAR(50)		NOT NULL,
+    surname		VARCHAR(50) 	NOT NULL,
+    nationality	VARCHAR(50)		NOT NULL,
+    PRIMARY KEY	(id_rider)
+);
+
+-- 2. EQUIPO
+CREATE TABLE teams (
+	id_team		INTEGER 		AUTO_INCREMENT,
+    name		VARCHAR(100)	NOT NULL,
+    PRIMARY KEY	(id_team)
+);
+	
+-- 3. CIRCUITO
+CREATE TABLE circuits (
+	id_circuit	INTEGER 		AUTO_INCREMENT,
+    name		VARCHAR(100)	NOT NULL,
+    country		VARCHAR(50)		NOT NULL,
+    PRIMARY KEY	(id_circuit)
+);
+
+-- 4. GRAN PREMIO
+CREATE TABLE grand_prix (
+	year		INTEGER 		NOT NULL,
+    sequence	INTEGER			NOT NULL,
+    name		VARCHAR(100) 	NOT NULL,
+    date		DATE			NOT NULL,
+    id_circuit	INTEGER			NOT NULL,
+    PRIMARY KEY	(year, sequence),
+    CONSTRAINT fk_gp_circuits
+		FOREIGN KEY (id_circuit)
+        REFERENCES circuits (id_circuit)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- 5. CARRERA
+CREATE TABLE races (
+	year		INTEGER 		NOT NULL,
+    sequence	INTEGER			NOT NULL,
+    category	VARCHAR(20)		NOT NULL,
+    PRIMARY KEY	(year, sequence, category),
+    CONSTRAINT fk_race_gp
+		FOREIGN KEY (year, sequence)
+        REFERENCES grand_prix (year, sequence)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- 6. RESULTADO
+CREATE TABLE results (
+	id_rider	INTEGER 		NOT NULL,
+    year		INTEGER			NOT NULL,
+    sequence	INTEGER			NOT NULL,
+    category	VARCHAR(20)		NOT NULL,
+    id_team		INTEGER,
+    bike		VARCHAR(50),
+    position	INTEGER,
+    points		DECIMAL(5,1),
+    speed		DECIMAL(6,3),
+    time		VARCHAR(20),
+    rider_number INTEGER,
+    PRIMARY KEY	(id_rider, year, sequence, category),
+    CONSTRAINT fk_res_rider
+		FOREIGN KEY (id_rider)
+        REFERENCES riders (id_rider)
+        ON DELETE RESTRICT 
+        ON UPDATE CASCADE,
+	CONSTRAINT fk_res_race
+		FOREIGN KEY (year, sequence, category)
+        REFERENCES races (year, sequence, category)
+        ON DELETE RESTRICT 
+        ON UPDATE CASCADE,
+	CONSTRAINT fk_res_team
+		FOREIGN KEY (id_team)
+        REFERENCES teams (id_team)
+        ON DELETE SET NULL 
+        ON UPDATE CASCADE
+);
+
+
