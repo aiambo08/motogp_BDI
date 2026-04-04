@@ -1,10 +1,13 @@
 -- 1. Nombre y apellidos del piloto que ha resultado campeon del mundo del año más reciente de la base de datos en la categorıa MotoGP.
+
+-- SUBCCONSULTA: año más reciente de la categoria motoGP
 SELECT MAX(re.year) FROM results re
 INNER JOIN races ra ON ra.year     = re.year
 	AND ra.sequence = re.sequence
 	AND ra.category = re.category
 WHERE ra.category = 'MotoGP';
 
+-- CONSULTA 1
 SELECT ri.forename, ri.surname, SUM(re.points) as puntos_totales, re.position FROM riders ri
 	INNER JOIN results re ON re.id_rider = ri.id_rider
     INNER JOIN races ra ON ra.year = re.year
@@ -153,7 +156,7 @@ WHERE ri.id_rider IN (SELECT id_rider FROM campeones WHERE category = 'Moto2')
     
 -- 5. Nombre de los equipos y número de veces en las que alguno de sus pilotos ha ganado un mundial en la categoría MotoGP ordenado de mayor a menor número de victorias
 
--- Campeon de cada año en MotoGP
+-- SUBCONSULTA: Campeon de cada año en MotoGP
 SELECT re.id_rider, ri.forename, ri.surname, ra.year FROM results re
 		INNER JOIN riders ri ON ri.id_rider = re.id_rider
 		INNER JOIN races ra ON ra.year = re.year
@@ -170,7 +173,8 @@ HAVING SUM(re.points) = (SELECT MAX(puntos_totales) FROM (
 								AND ra2.year = ra.year
 							GROUP BY re2.id_rider
 							) AS T);
-                            
+
+-- CONSULTA 5
 SELECT te.name, COUNT(*) AS num_campeones FROM teams te
 	INNER JOIN (
 		-- campeones con su equipo
@@ -207,8 +211,8 @@ ORDER BY num_campeones DESC;
 -- 6. Listado de circuitos donde jamás ha ganado un piloto cuya nacionalidad coincida con el país del trazado, 
 -- en ninguna de las categorías registradas
 
--- Circuitos que sí tienen ganador local
-SELECT gp.id_circuit FROM grand_prix gp
+-- SUBCONSULTA: Circuitos que sí tienen ganador local
+SELECT DISTINCT gp.id_circuit FROM grand_prix gp
 	INNER JOIN races ra ON ra.year = gp.year
 						AND ra.sequence = gp.sequence
 	INNER JOIN results re ON re.year = ra.year
@@ -219,8 +223,20 @@ SELECT gp.id_circuit FROM grand_prix gp
 WHERE re.position = 1
 	AND ri.nationality = ci.country;
 
-
-            
+-- CONSULTA 6
+SELECT ci.name, ci.country FROM circuits ci
+WHERE ci.id_circuit NOT IN (
+	SELECT DISTINCT gp.id_circuit FROM grand_prix gp
+			INNER JOIN races ra ON ra.year = gp.year
+								AND ra.sequence = gp.sequence
+			INNER JOIN results re ON re.year = ra.year
+								AND re.sequence = ra.sequence
+								AND re.category = ra.category
+			INNER JOIN riders ri ON ri.id_rider = re.id_rider
+			INNER JOIN circuits ci2 ON ci2.id_circuit = gp.id_circuit
+		WHERE re.position = 1
+			AND ri.nationality = ci2.country)
+ORDER BY ci.country, ci.name;
             
             
             
