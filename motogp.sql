@@ -88,3 +88,16 @@ CREATE TABLE results (
 );
 
 
+-- Paso 1: desactivar FKs para poder vaciar en cualquier orden
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Paso 2: vaciar todas las tablas (mantiene estructura y AUTO_INCREMENT)
+TRUNCATE TABLE results;
+TRUNCATE TABLE races;
+TRUNCATE TABLE grand_prix;
+TRUNCATE TABLE circuits;
+TRUNCATE TABLE teams;
+TRUNCATE TABLE riders;
+
+-- Paso 3: reactivar FKs
+SET FOREIGN_KEY_CHECKS = 1;
