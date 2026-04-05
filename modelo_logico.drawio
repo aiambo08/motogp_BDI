@@ -1,23 +1,23 @@
 <mxfile host="65bd71144e">
     <diagram id="YJSI9-KUHHeqrE6zbo3Z" name="Page-1">
-        <mxGraphModel dx="1742" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1906" dy="806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="2" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;PILOTO (&lt;b&gt;&lt;u&gt;id_piloto&lt;/u&gt;&lt;/b&gt;, rider_first_name, rider_last_name, rider_country)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="-10" y="110" width="510" height="30" as="geometry"/>
+                <mxCell id="2" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;RIDER &lt;/font&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;(&lt;b&gt;&lt;u&gt;id_rider&lt;/u&gt;&lt;/b&gt;, rider_first_name, rider_last_name, rider_country)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="-10" y="105" width="510" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;CIRCUITO (&lt;b&gt;&lt;u&gt;id_circuito&lt;/u&gt;&lt;/b&gt;, circuit_name, circuit_country)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="455" y="175" width="410" height="30" as="geometry"/>
+                <mxCell id="3" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;CIRCUIT &lt;/font&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;(&lt;b&gt;&lt;u&gt;id_circuit&lt;/u&gt;&lt;/b&gt;, circuit_name, circuit_country)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="460" y="170" width="400" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;CARRERA (&lt;b&gt;&lt;u&gt;year, secuence, category&lt;/u&gt;&lt;/b&gt;&amp;nbsp;race_name, date, id_circuito)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="170" y="310" width="510" height="30" as="geometry"/>
+                <mxCell id="4" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;RACE &lt;/font&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;(&lt;b&gt;&lt;u&gt;year, sequence, category,&amp;nbsp;&lt;/u&gt;&lt;/b&gt;race_name, date, id_circuit)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="185" y="305" width="480" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;RESULTADO (&lt;b&gt;&lt;u&gt;id_piloto&lt;/u&gt;&lt;/b&gt;, &lt;b&gt;&lt;u&gt;year, secuence , category&lt;/u&gt;&lt;/b&gt;,&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); font-size: 16px; background-color: transparent;&quot;&gt;id_equipo, speed, points, position, bike, time, rider_number)&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="-10" y="420" width="450" height="50" as="geometry"/>
+                <mxCell id="5" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;RESULT &lt;/font&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;(&lt;b&gt;&lt;u&gt;id_rider&lt;/u&gt;&lt;/b&gt;, &lt;b&gt;&lt;u&gt;year, sequence , category&lt;/u&gt;&lt;/b&gt;,&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(63, 63, 63); font-size: 16px; background-color: transparent;&quot;&gt;id_team, speed, points, position, bike, time, rider_number)&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="-5" y="415" width="440" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;EQUIPO (&lt;b&gt;&lt;u&gt;id_equipo&lt;/u&gt;&lt;/b&gt;, team_name)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry y="520" width="270" height="30" as="geometry"/>
+                <mxCell id="6" value="&lt;font style=&quot;font-size: 19px;&quot;&gt;TEAM &lt;/font&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;(&lt;b&gt;&lt;u&gt;id_team&lt;/u&gt;&lt;/b&gt;, team_name)&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="10" y="515" width="250" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="8" style="edgeStyle=none;html=1;entryX=0.126;entryY=0.967;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="6" target="5" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -26,15 +26,16 @@
                     <mxGeometry x="350" y="205" width="20" height="190" as="geometry"/>
                 </mxCell>
                 <mxCell id="14" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;rotation=90;" parent="1" vertex="1">
-                    <mxGeometry x="292.5" y="317.5" width="20" height="195" as="geometry"/>
+                    <mxGeometry x="280" y="320" width="20" height="195" as="geometry"/>
                 </mxCell>
                 <mxCell id="15" value="" style="curved=1;endArrow=classic;html=1;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="310" y="400" as="sourcePoint"/>
+                        <mxPoint x="300" y="400" as="sourcePoint"/>
                         <mxPoint x="360" y="280" as="targetPoint"/>
                         <Array as="points">
                             <mxPoint x="300" y="390"/>
-                            <mxPoint x="300" y="340"/>
+                            <mxPoint x="300" y="370"/>
+                            <mxPoint x="320" y="360"/>
                             <mxPoint x="680" y="395"/>
                             <mxPoint x="700" y="300"/>
                             <mxPoint x="520" y="230"/>

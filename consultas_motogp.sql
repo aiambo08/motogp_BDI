@@ -8,21 +8,26 @@ INNER JOIN races ra ON ra.year     = re.year
 WHERE ra.category = 'MotoGP';
 
 -- CONSULTA 1
-SELECT ri.forename, ri.surname, SUM(re.points) as puntos_totales, re.position FROM riders ri
+SELECT ri.forename, ri.surname, SUM(re.points) as puntos_totales FROM riders ri
 	INNER JOIN results re ON re.id_rider = ri.id_rider
     INNER JOIN races ra ON ra.year = re.year
 		AND ra.sequence = re.sequence
         AND ra.category = re.category
 WHERE ra.category = "MotoGP"
-	AND re.position = 1
 	AND re.year = (SELECT MAX(re2.year) FROM results re2
 						INNER JOIN races ra2 ON ra2.year = re2.year
 							AND ra2.sequence = re2.sequence
 							AND ra2.category = re2.category
 					WHERE ra2.category = 'MotoGP')
-GROUP BY ri.id_rider, ri.forename, ri.surname, re.position
-ORDER BY puntos_totales DESC
-LIMIT 1;
+GROUP BY ri.id_rider, ri.forename, ri.surname
+HAVING SUM(re.points) >= ALL (SELECT SUM(re2.points) FROM results re2
+								INNER JOIN races ra2 ON ra2.year = re2.year
+									AND ra2.sequence = re2.sequence
+									AND ra2.category = re2.category
+							WHERE ra2.category = 'MotoGP'
+								AND ra2.year = (SELECT MAX(ra3.year) FROM races ra3
+												WHERE ra3.category = 'MotoGP')
+						GROUP BY re2.id_rider);
 
 -- 2. País o paıses con mayor número de pilotos diferentes en la década de los 2010 (de 2010 a 2019
 -- inclusive) en categorias distintas a MotoE. Muestra tanto las siglas del país como en número de
@@ -176,34 +181,28 @@ HAVING SUM(re.points) = (SELECT MAX(puntos_totales) FROM (
 
 -- CONSULTA 5
 SELECT te.name, COUNT(*) AS num_campeones FROM teams te
-	INNER JOIN (
-		-- campeones con su equipo
-        SELECT re.id_rider, ra.year, (SELECT re2.id_team FROM results re2
-										INNER JOIN races ra2 ON ra2.year = re2.year
-											AND ra2.sequence = re2.sequence
-                                            AND ra2.category = re2.category
-										WHERE ra2.category = "MotoGP"
-											AND re2.id_rider = re.id_rider
-                                            AND ra2.year = ra.year
-										GROUP BY re2.id_team
-                                        ORDER BY SUM(re2.points) DESC
-                                        LIMIT 1) AS E
-		FROM results re
-			INNER JOIN races ra ON ra.year = re.year
-				AND ra.sequence = re.sequence
-				AND ra.category = re.category
-		WHERE ra.category = 'MotoGP'
-		GROUP BY re.id_rider, ra.year
-		HAVING SUM(re.points) = (SELECT MAX(puntos_totales) FROM (
-									SELECT SUM(re2.points) AS puntos_totales FROM results re2
-										INNER JOIN races ra2 ON ra2.year = re2.year
-											AND ra2.sequence = re2.sequence
-											AND ra2.category = re2.category
-									WHERE ra2.category = 'MotoGP'
-										AND ra2.year = ra.year
-									GROUP BY re2.id_rider
-									) AS T))
-			AS C ON te.id_team = C.E
+	INNER JOIN (SELECT DISTINCT ra.year, re.id_team FROM results re
+					INNER JOIN races ra ON ra.year = re.year
+						AND ra.sequence = re.sequence
+						AND ra.category = re.category
+				WHERE ra.category = 'MotoGP'
+					AND (re.id_rider, ra.year) IN (SELECT re2.id_rider, ra2.year FROM results re2
+														INNER JOIN races ra2 ON ra2.year = re2.year
+															AND ra2.sequence = re2.sequence
+															AND ra2.category = re2.category
+													WHERE ra2.category = 'MotoGP'
+													GROUP BY re2.id_rider, ra2.year
+													HAVING SUM(re2.points) = (SELECT MAX(puntos_totales) FROM (SELECT SUM(re3.points) AS puntos_totales FROM results re3
+																													INNER JOIN races ra3 ON ra3.year = re3.year
+																														AND ra3.sequence = re3.sequence
+																														AND ra3.category = re3.category
+																												WHERE ra3.category = 'MotoGP'
+																													AND ra3.year = ra2.year
+																												GROUP BY re3.id_rider
+																												) T
+																				)
+													)
+			) C ON te.id_team = C.id_team
 GROUP BY te.id_team, te.name
 ORDER BY num_campeones DESC;
 

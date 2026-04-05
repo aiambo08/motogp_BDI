@@ -89,44 +89,18 @@ CREATE TABLE results (
 
 -- EN CASO DE TENER QUE MODIFICAR LA BASE DE DATOS, VACIAMOS LA ANTIGUA PARA EVITAR DUPLICADOS
 -- Paso 1: desactivar FKs para poder vaciar en cualquier orden
-SET FOREIGN_KEY_CHECKS = 0;
+-- SET FOREIGN_KEY_CHECKS = 0;
 
 -- Paso 2: vaciar todas las tablas (mantiene estructura y AUTO_INCREMENT)
-TRUNCATE TABLE results;
-TRUNCATE TABLE races;
-TRUNCATE TABLE grand_prix;
-TRUNCATE TABLE circuits;
-TRUNCATE TABLE teams;
-TRUNCATE TABLE riders;
+-- TRUNCATE TABLE results;
+-- TRUNCATE TABLE races;
+-- TRUNCATE TABLE grand_prix;
+-- TRUNCATE TABLE circuits;
+-- TRUNCATE TABLE teams;
+-- TRUNCATE TABLE riders;
 
 -- Paso 3: reactivar FKs
-SET FOREIGN_KEY_CHECKS = 1;
+-- SET FOREIGN_KEY_CHECKS = 1;
 
 
 
--- Modificar los valores del atributo country para que coincidan con el atributo nationality y poder realizar la consulta 6
-UPDATE circuits
-SET country = CASE country
-    WHEN 'AR' THEN 'ARG'
-    WHEN 'AT' THEN 'AUT'
-    WHEN 'AU' THEN 'AUS'
-    WHEN 'BR' THEN 'BRA'
-    WHEN 'CN' THEN 'CHN'
-    WHEN 'CZ' THEN 'CZE'
-    WHEN 'DE' THEN 'GER'
-    WHEN 'ES' THEN 'SPA'
-    WHEN 'FR' THEN 'FRA'
-    WHEN 'GB' THEN 'GBR'
-    WHEN 'IT' THEN 'ITA'
-    WHEN 'JP' THEN 'JPN'
-    WHEN 'MY' THEN 'MAL'
-    WHEN 'NL' THEN 'NED'
-    WHEN 'PT' THEN 'POR'
-    WHEN 'QA' THEN 'QAT'
-    WHEN 'TH' THEN 'THA'
-    WHEN 'TR' THEN 'TUR'
-    WHEN 'US' THEN 'USA'
-    WHEN 'ZA' THEN 'RSA'
-    ELSE country
-END
-WHERE id_circuit >= 1;  
