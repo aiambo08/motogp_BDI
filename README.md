@@ -106,13 +106,7 @@ El fichero `moto_results.csv` contiene **29 931 registros** de carrera sin clave
 ### Dependencias Python
 
 ```bash
-pip install pandas numpy matplotlib plotly
-```
-
-O si dispones de un `requirements.txt`:
-
-```bash
-pip install -r requirements.txt
+pip install pandas numpy matplotlib plotly sqlite3
 ```
 
 ---
@@ -122,7 +116,6 @@ pip install -r requirements.txt
 ### Paso 1 — Clonar el repositorio
 
 ```bash
-# Sustituye TU_USUARIO y TU_REPOSITORIO por los valores reales
 git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
 cd TU_REPOSITORIO
 ```
