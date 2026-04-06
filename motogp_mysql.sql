@@ -33480,8 +33480,7 @@ INSERT INTO results (id_rider, year, sequence, category, id_team, bike, position
 (469, 2000, 1, '500cc', NULL, 'Yamaha', 2, 20.0, 156.1, '+0.366', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
-
--- Modificar los valores del atributo country para que coincidan con el atributo nationality y poder realizar la consulta 6
+-- -- Modificar los valores del atributo country para que coincidan con el atributo nationality y poder realizar la consulta 6
 UPDATE circuits
 SET country = CASE country
     WHEN 'AR' THEN 'ARG'
@@ -33506,4 +33505,5 @@ SET country = CASE country
     WHEN 'ZA' THEN 'RSA'
     ELSE country
 END
-WHERE id_circuit >= 1;  
+WHERE id_circuit >= 1;
+

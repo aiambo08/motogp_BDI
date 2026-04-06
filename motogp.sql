@@ -5,7 +5,7 @@ COLLATE utf8_spanish2_ci;
 use motogp;
 
 -- 1. PILOTO
-CREATE TABLE riders (
+CREATE TABLE IF NOT EXISTS riders (
 	id_rider	INTEGER 		AUTO_INCREMENT,
     forename	VARCHAR(50)		NOT NULL,
     surname		VARCHAR(50) 	NOT NULL,
@@ -14,14 +14,14 @@ CREATE TABLE riders (
 );
 
 -- 2. EQUIPO
-CREATE TABLE teams (
+CREATE TABLE IF NOT EXISTS teams (
 	id_team		INTEGER 		AUTO_INCREMENT,
     name		VARCHAR(100)	NOT NULL,
     PRIMARY KEY	(id_team)
 );
 	
 -- 3. CIRCUITO
-CREATE TABLE circuits (
+CREATE TABLE IF NOT EXISTS circuits (
 	id_circuit	INTEGER 		AUTO_INCREMENT,
     name		VARCHAR(100)	NOT NULL,
     country		VARCHAR(50)		NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE circuits (
 );
 
 -- 4. GRAN PREMIO
-CREATE TABLE grand_prix (
+CREATE TABLE IF NOT EXISTS grand_prix (
 	year		INTEGER 		NOT NULL,
     sequence	INTEGER			NOT NULL,
     name		VARCHAR(100) 	NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE grand_prix (
 );
 
 -- 5. CARRERA
-CREATE TABLE races (
+CREATE TABLE IF NOT EXISTS races (
 	year		INTEGER 		NOT NULL,
     sequence	INTEGER			NOT NULL,
     category	VARCHAR(20)		NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE races (
 );
 
 -- 6. RESULTADO
-CREATE TABLE results (
+CREATE TABLE IF NOT EXISTS results (
 	id_rider	INTEGER 		NOT NULL,
     year		INTEGER			NOT NULL,
     sequence	INTEGER			NOT NULL,
@@ -89,18 +89,18 @@ CREATE TABLE results (
 
 -- EN CASO DE TENER QUE MODIFICAR LA BASE DE DATOS, VACIAMOS LA ANTIGUA PARA EVITAR DUPLICADOS
 -- Paso 1: desactivar FKs para poder vaciar en cualquier orden
--- SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- Paso 2: vaciar todas las tablas (mantiene estructura y AUTO_INCREMENT)
--- TRUNCATE TABLE results;
--- TRUNCATE TABLE races;
--- TRUNCATE TABLE grand_prix;
--- TRUNCATE TABLE circuits;
--- TRUNCATE TABLE teams;
--- TRUNCATE TABLE riders;
+TRUNCATE TABLE results;
+TRUNCATE TABLE races;
+TRUNCATE TABLE grand_prix;
+TRUNCATE TABLE circuits;
+TRUNCATE TABLE teams;
+TRUNCATE TABLE riders;
 
 -- Paso 3: reactivar FKs
--- SET FOREIGN_KEY_CHECKS = 1;
+SET FOREIGN_KEY_CHECKS = 1;
 
 
 

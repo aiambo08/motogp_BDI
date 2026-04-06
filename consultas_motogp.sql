@@ -30,7 +30,7 @@ HAVING SUM(re.points) >= ALL (SELECT SUM(re2.points) FROM results re2
 						GROUP BY re2.id_rider);
 
 -- 2. País o paıses con mayor número de pilotos diferentes en la década de los 2010 (de 2010 a 2019
--- inclusive) en categorias distintas a MotoE. Muestra tanto las siglas del país como en número de
+-- inclusive) en categorias distintas a MotoE. Muestra tanto las siglas del país como el número de
 -- pilotos diferentes que han competido en al menos una carrera
 
 SELECT ri.nationality, COUNT(DISTINCT ri.id_rider)as contador FROM riders ri
@@ -240,7 +240,6 @@ ORDER BY ci.country, ci.name;
             
             
 
-    
     
     
 
