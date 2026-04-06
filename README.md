@@ -81,6 +81,7 @@ El fichero `moto_results.csv` contiene **29 931 registros** de carrera sin clave
  ┣ 📁 img/                     
  ┃   ┣ 🖼️  er_diagram.png      # Modelo conceptual con notación Martín
  ┃   ┗ 🖼️  logical_model.png   # Modelo lógico relacional
+ ┃   ┗ 🖼️  modelo_mod.png      # Modelo conceptual modificado
  ┗ 📄 README.md
 ```
 
