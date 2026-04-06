@@ -20,12 +20,7 @@
   Grupo Prac1_1 &nbsp;|&nbsp; Ni, Aibo &nbsp;·&nbsp; Ye, Sergio
 </p>
 
-<!-- ⚠️  ELEMENTO PENDIENTE: captura del diagrama E-R final
-     Exporta la imagen del diagrama E-R desde MySQL Workbench o draw.io
-     y guárdala como 'img/er_diagram.png' en el repositorio.
-     Luego descomenta la línea siguiente:
--->
-<!-- <img src="img/er_diagram.png" alt="Diagrama E-R" width="720"/> -->
+
 
 </div>
 
@@ -116,14 +111,14 @@ pip install pandas numpy matplotlib plotly sqlite3
 ### Paso 1 — Clonar el repositorio
 
 ```bash
-git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
-cd TU_REPOSITORIO
+git clone https://github.com/aiambo08/motogp_BDI.git
+cd motogp_BDI
 ```
 
 ### Paso 2 — Ejecutar el notebook (EDA + migración a SQLite)
 
 ```bash
-jupyter notebook eda.ipynb
+jupyter notebook motogp.ipynb
 ```
 
 Al ejecutar todas las celdas, el notebook realiza automáticamente:
@@ -153,7 +148,7 @@ O bien: **File → Open SQL Script → `motogp.sql`** y pulsa ⚡ *Execute All*.
 SOURCE /ruta/absoluta/al/proyecto/motogp_mysql.sql;
 ```
 
-> ⏱️ Tiempo estimado: **1–3 minutos** (el fichero contiene ~30 000 INSERTs en bloques de 500 filas).
+> ⏱️ Tiempo estimado: **1 minuto** (el fichero contiene ~30 000 INSERTs en bloques de 500 filas).
 
 ### Paso 5 — Ejecutar las consultas analíticas
 
